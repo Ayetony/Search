@@ -1,0 +1,6 @@
+select (login.userid, login.password, login.name, groupinfor.groupname, level.levelinfor )
+from level as t
+left join login on login.groupid = groupinfor.groupid
+left join groupinfor on groupinfor.groupid = relationship_1.groupid
+left join relationship_1 on relationship_1.levelid = level.levelid
+where t.password = 'yu65193852';

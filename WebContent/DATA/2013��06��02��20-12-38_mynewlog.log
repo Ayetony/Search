@@ -1,0 +1,536 @@
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+130127 13:49:52	      1 Connect     root@localhost on 
+		      1 Query       select @@version_comment limit 1
+130127 13:50:09	      1 Query       show variables like 'log'
+130127 13:50:31	      2 Connect     root@localhost on 
+		      2 Query       SET NAMES utf8
+		      2 Query       DROP DATABASE `anti_paradigm`
+130127 13:50:36	      3 Connect     root@localhost on 
+		      3 Query       SHOW VARIABLES
+		      3 Query       SHOW COLLATION
+		      3 Query       SET character_set_results=NULL
+		      3 Query       CREATE DATABASE IF NOT EXISTS anti_paradigm
+		      3 Query       USE anti_paradigm
+		      3 Query       CREATE TABLE major(
+major_id INT PRIMARY KEY auto_increment,
+major_name CHAR(40))
+130127 13:50:37	      3 Query       CREATE TABLE student(
+student_id INT PRIMARY KEY auto_increment,
+student_name char(40),
+student_phone char(20),
+student_address char(80),
+student_email char(40),
+student_card FLOAT,
+major_id INT,
+FOREIGN KEY(major_id) REFERENCES major(major_id))
+		      3 Query       CREATE TABLE course(
+course_id INT PRIMARY KEY auto_increment,
+course_name char(40))
+		      3 Query       CREATE TABLE take_course(
+take_course_id INT PRIMARY KEY auto_increment,
+course_id INT,
+student_id INT,
+FOREIGN KEY(course_id) REFERENCES course(course_id),
+FOREIGN KEY(student_id) REFERENCES student(student_id))
+		      3 Query       CREATE TABLE academy(
+academy_id INT PRIMARY KEY auto_increment,
+academy_name char(40))
+130127 13:50:38	      3 Query       CREATE TABLE teacher(
+teacher_id INT PRIMARY KEY auto_increment,
+teacher_name char(30),
+academy_id INT,
+FOREIGN KEY(academy_id) REFERENCES academy(academy_id))
+130127 13:50:39	      3 Query       CREATE TABLE grade(
+grade_id INT PRIMARY KEY auto_increment,
+grade_above80 INT,
+grade_above60 INT,
+grade_under60 INT)
+130127 13:50:40	      3 Query       CREATE TABLE exam(
+exam_id INT PRIMARY KEY auto_increment,
+exam_time char(40),
+exam_location char(60))
+		      3 Query       CREATE TABLE give_lesson(
+give_lesson_id INT PRIMARY KEY auto_increment,
+course_id INT,
+teacher_id INT,
+exam_id INT,
+grade_id INT,
+FOREIGN KEY(course_id) REFERENCES course(course_id),
+FOREIGN KEY(teacher_id) REFERENCES teacher(teacher_id),
+FOREIGN KEY(exam_id) REFERENCES exam(exam_id),
+FOREIGN KEY(grade_id) REFERENCES grade(grade_id))
+130127 13:50:41	      3 Query       INSERT INTO major(major_name) VALUES ('Computer Science')
+		      3 Query       INSERT INTO major(major_name) VALUES ('Physics')
+		      3 Query       INSERT INTO major(major_name) VALUES ('Chemistry')
+		      3 Query       INSERT INTO student(student_name,student_phone,student_address,student_email,student_card,major_id) VALUES ('student1','phone1','address1','email1',200,1)
+		      3 Query       INSERT INTO student(student_name,student_phone,student_address,student_email,student_card,major_id) VALUES ('student2','phone2','address2','email2',150,2)
+		      3 Query       INSERT INTO student(student_name,student_phone,student_address,student_email,student_card,major_id) VALUES ('student3','phone3','address3','email3',100,3)
+		      3 Query       INSERT INTO student(student_name,student_phone,student_address,student_email,student_card,major_id) VALUES ('student4','phone4','address4','email4',300,1)
+		      3 Query       INSERT INTO student(student_name,student_phone,student_address,student_email,student_card,major_id) VALUES ('student5','phone5','address5','email5',80,2)
+		      3 Query       INSERT INTO course(course_name) VALUES('Operation System')
+		      3 Query       INSERT INTO course(course_name) VALUES('Data Structure')
+		      3 Query       INSERT INTO course(course_name) VALUES('Physics Basic')
+		      3 Query       INSERT INTO course(course_name) VALUES('Chemistry Basic')
+		      3 Query       INSERT INTO take_course(course_id,student_id) VALUES (1,3)
+		      3 Query       INSERT INTO take_course(course_id,student_id) VALUES (1,5)
+		      3 Query       INSERT INTO take_course(course_id,student_id) VALUES (2,4)
+130127 13:50:42	      3 Query       INSERT INTO take_course(course_id,student_id) VALUES (3,3)
+		      3 Query       INSERT INTO take_course(course_id,student_id) VALUES (3,4)
+		      3 Query       INSERT INTO take_course(course_id,student_id) VALUES (3,5)
+		      3 Query       INSERT INTO academy(academy_name) VALUES ('Computer Science And Engineering')
+		      3 Query       INSERT INTO academy(academy_name) VALUES ('Physics And Engineering')
+130127 13:50:43	      3 Query       INSERT INTO academy(academy_name) VALUES ('Chemistry And Engineering')
+		      3 Query       INSERT INTO teacher(teacher_name,academy_id) VALUES ('teacher1',1)
+		      3 Query       INSERT INTO teacher(teacher_name,academy_id) VALUES ('teacher2',1)
+		      3 Query       INSERT INTO teacher(teacher_name,academy_id) VALUES ('teacher3',1)
+		      3 Query       INSERT INTO teacher(teacher_name,academy_id) VALUES ('teacher4',2)
+		      3 Query       INSERT INTO teacher(teacher_name,academy_id) VALUES ('teacher5',3)
+		      3 Query       INSERT INTO grade(grade_above80,grade_above60,grade_under60) VALUES (20,70,30)
+		      3 Query       INSERT INTO grade(grade_above80,grade_above60,grade_under60) VALUES (40,80,20)
+		      3 Query       INSERT INTO grade(grade_above80,grade_above60,grade_under60) VALUES (10,40,60)
+		      3 Query       INSERT INTO grade(grade_above80,grade_above60,grade_under60) VALUES (10,40,60)
+130127 13:50:44	      3 Query       INSERT INTO grade(grade_above80,grade_above60,grade_under60) VALUES (10,40,60)
+		      3 Query       INSERT INTO exam(exam_time,exam_location) VALUES ('2012-12-1-9:00','classroom1')
+		      3 Query       INSERT INTO exam(exam_time,exam_location) VALUES ('2012-12-2-14:30','classroom2')
+		      3 Query       INSERT INTO exam(exam_time,exam_location) VALUES ('2012-12-3-14:30','classroom3')
+		      3 Query       INSERT INTO exam(exam_time,exam_location) VALUES ('2012-12-4-14:30','classroom4')
+		      3 Query       INSERT INTO exam(exam_time,exam_location) VALUES ('2012-12-5-14:30','classroom5')
+		      3 Query       INSERT INTO give_lesson(course_id,teacher_id,exam_id,grade_id) VALUES (1,1,1,1)
+		      3 Query       INSERT INTO give_lesson(course_id,teacher_id,exam_id,grade_id) VALUES (1,2,2,2)
+		      3 Query       INSERT INTO give_lesson(course_id,teacher_id,exam_id,grade_id) VALUES (2,3,3,3)
+		      3 Query       INSERT INTO give_lesson(course_id,teacher_id,exam_id,grade_id) VALUES (3,4,4,4)
+		      3 Query       INSERT INTO give_lesson(course_id,teacher_id,exam_id,grade_id) VALUES (4,5,5,5)
+130127 13:50:51	      2 Query       SHOW DATABASES
+130127 13:50:52	      4 Connect     root@localhost on 
+		      4 Query       SET NAMES utf8
+		      4 Init DB     anti_paradigm
+		      4 Query       SELECT @@character_set_database, @@collation_database
+		      4 Query       SHOW FULL TABLES WHERE Table_type != 'VIEW'
+130127 16:00:28	      2 Quit       
+		      4 Quit       
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+130217 14:37:10	      1 Connect     root@localhost on 
+		      1 Query       select @@version_comment limit 1
+130217 14:37:25	      1 Query       show databases
+130217 14:37:41	      1 Query       choose anti_paradigm
+130217 14:37:51	      1 Query       select anti_paradigm
+130217 14:38:07	      1 Query       change anti_paradigm
+130217 14:38:41	      1 Query       SELECT DATABASE()
+130217 14:38:43	      1 Query       SELECT DATABASE()
+		      1 Init DB     anti_paradigm
+130217 14:38:52	      1 Query       show tables
+130217 14:39:46	      1 Query       describe academy
+130217 14:40:01	      1 Query       show academy
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+130221 15:17:56	      1 Connect     root@localhost on 
+		      1 Query       select @@version_comment limit 1
+130221 15:18:05	      1 Query       show databases
+130221 15:18:13	      1 Query       SELECT DATABASE()
+		      1 Init DB     anti_paradigm
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+C:\Program Files\MySQL\MySQL Server 5.0\bin\mysqld-nt, Version: 5.0.96-community-nt-log (MySQL Community Edition (GPL)). started with:
+TCP Port: 3306, Named Pipe: (null)
+Time                 Id Command    Argument
+130222 11:01:44	      1 Connect     root@localhost on 
+		      1 Query       select @@version_comment limit 1
+130222 11:01:56	      1 Query       show databases
+130222 11:02:05	      1 Query       SELECT DATABASE()
+		      1 Init DB     anti_paradigm
+130222 11:02:08	      1 Query       SELECT DATABASE()
+		      1 Init DB     anti_paradigm
+130222 11:03:06	      1 Query       select student.student_address from student where student.student_name = 'student3'
+130222 11:03:16	      1 Query       select student.student_address from student where student.student_name = 'student4'
+130222 11:03:26	      1 Query       select student.student_address from student where student.student_name = 'student5'
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:26	      1 Query       select grade.grade_id from grade where abs(grade.grade_above80) > 10
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join give_lesson on give_lesson.course_id = course.course_id
+left join teacher on teacher.teacher_id = give_lesson.give_lesson_id
+left join academy on academy.academy_id = teacher.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'
+130222 11:03:34	      1 Query       select course.course_name,major.major_name,academy.academy_name from course 
+left join take_course on take_course.course_id = course.course_id
+left join student on student.student_id = take_course.student_id 
+left join major on major.major_id = student.major_id
+left join academy on academy.academy_id = major.academy_id
+where course.course_name = 'Operation System'

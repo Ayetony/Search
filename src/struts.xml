@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+<constant name="struts.multipart.maxSize" value="104857600"/>
+	<package name="struts2" extends="struts-default">
+	<global-results>
+  		<result name="error">/exception.jsp</result>
+   	</global-results>
+   	<global-exception-mappings>
+	 	<exception-mapping exception="java.lang.Exception" result="error" />
+	 	<exception-mapping exception="java.lang.ExceptionInInitializerError" result="error" />
+	 	<exception-mapping exception="java.lang.NullPointerException" result="error" />
+   	</global-exception-mappings>
+	<action name="doIndex" class="com.yzc.action.DoIndexAction">
+		<result name="success">/createIndex.jsp</result>
+	</action>
+	<action name="updateIndex" class="com.yzc.action.UpdateIndexAction">
+		<result name="success">/createIndex.jsp</result>
+	</action>
+	<action name="doSearch" class="com.yzc.action.DoSearchAction">
+		<result name="success">/display.jsp</result>
+		<result name="input">/doSearch.jsp</result>
+	</action>
+	<action name="login" class="com.yzc.action.LoginAction">
+		<result name="success">/welcome.jsp</result>
+		<result name="fail">/exception.jsp</result>
+		<result name="input">/login.jsp</result>
+	</action>
+	<action name="upload" class="com.yzc.action.UploadAction">
+		<result name="success">/uploadSuccess.jsp</result>
+       	<result name="input">/upload.jsp</result>
+		<interceptor-ref name="fileUpload">
+        	<param name="maximumSize">104857299</param>
+       	</interceptor-ref>
+       	<interceptor-ref name="defaultStack"/>
+	</action>
+	<action name="register" class="com.yzc.action.RegisterAction">
+		<result name="success">/registerSuccess.jsp</result>
+		<result name="success_admin">/manager.jsp</result>
+		<result name="input">/register.jsp</result>
+	</action>
+	<action name="manager" class="com.yzc.action.ManagerAction">
+		<result name="success">/manager.jsp</result>
+	</action>
+	<action name="updateUser" class="com.yzc.action.UpdateUserAction">
+		<result name="success">/manager.jsp</result>
+	</action>
+	<action name="updateRelation" class="com.yzc.action.UpdateRelationAction">
+		<result name="success">/other.jsp</result>
+	</action>
+	<action name="managerOther" class="com.yzc.action.ManagerOtherAction">
+		<result name="success">/other.jsp</result>
+	</action>
+	<action name="updateGroup" class="com.yzc.action.UpdateGroupAction">
+		<result name="success">/other.jsp</result>
+	</action>
+	<action name="updateLevel" class="com.yzc.action.UpdateLevelAction">
+		<result name="success">/other.jsp</result>
+	</action>
+	</package>
+</struts>
